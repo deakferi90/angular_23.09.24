@@ -28,7 +28,7 @@ export class FormsComponent {
   }
 
   nameValidator(control: AbstractControl) {
-    const namePattern = /^[A-Za-z-]+$/;
+    const namePattern = /^[A-Za-z]+(-[A-Za-z]+)*(\s[A-Za-z]+(-[A-Za-z]+)*)*$/;
 
     if (!control.value) {
       return null;
