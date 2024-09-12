@@ -1,0 +1,19 @@
+.personal-info-box {
+  width: 900px;
+  height: 600px;
+  border: 1px solid white;
+  background: white;
+  box-shadow: inset 0 0 0 10px white;
+  border-radius: 10px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: calc(50% - 300px);
+  left: calc(50% - 450px);
+}
+
+.title {
+  color: darkblue;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
