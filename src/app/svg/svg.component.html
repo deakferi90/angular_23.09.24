@@ -45,15 +45,22 @@
   </g>
 </svg>
 <div class="steps-text-container">
-  @for (item of stepsData; track item.id) {
-  <div class="steps-data-container">
+  <div
+    class="steps-data-container"
+    *ngFor="let item of stepsData"
+    (click)="setActiveStep(item.id)"
+  >
     <div>
-      <div class="step-value">{{ item.id }}</div>
+      <div
+        class="step-value"
+        [ngClass]="{ active: item.active, inactive: !item.active }"
+      >
+        {{ item.id }}
+      </div>
     </div>
     <div>
       <div class="step-nr">{{ item.subtitle }}</div>
       <div class="step-title">{{ item.title }}</div>
     </div>
   </div>
-  }
 </div>

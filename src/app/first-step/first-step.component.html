@@ -1,6 +1,6 @@
 <div class="personal-info-box">
   <div class="image-container">
-    <app-svg />
-    <app-forms />
+    <app-svg [currentStep]="currentStep" (stepChange)="onStepChange($event)" />
+    <app-forms class="app-forms" />
   </div>
 </div>

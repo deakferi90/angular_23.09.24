@@ -17,3 +17,10 @@
   color: darkblue;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
+.app-forms {
+  position: absolute;
+  top: 3%;
+  left: 40%;
+  width: 51%;
+}

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -18,6 +18,7 @@ import {
 export class FormsComponent {
   personalInfoForm: FormGroup;
   formErrorMessage: string | null = null;
+  @Input() currentStep!: number;
 
   constructor(private fb: FormBuilder) {
     this.personalInfoForm = this.fb.group({
@@ -27,7 +28,7 @@ export class FormsComponent {
     });
   }
 
-  nameValidator(control: AbstractControl) {
+  nameValidator(control: AbstractControl): object | null {
     const namePattern = /^[A-Za-z]+(-[A-Za-z]+)*(\s[A-Za-z]+(-[A-Za-z]+)*)*$/;
 
     if (!control.value) {
@@ -67,10 +68,10 @@ export class FormsComponent {
   }
 
   private getFormErrorMessage(): string {
-    if (this.personalInfoForm.controls['name'].errors?.['required']) {
+    if (this.f['name'].errors?.['required']) {
       return 'Invalid name.';
     }
-    if (this.personalInfoForm.controls['email'].errors?.['required']) {
+    if (this.f['email'].errors?.['required']) {
       return 'Invalid email address.';
     }
     if (this.f['phone'].errors?.['required']) {
