@@ -18,7 +18,7 @@ import {
 export class FormsComponent {
   personalInfoForm: FormGroup;
   formErrorMessage: string | null = null;
-  @Input() currentStep!: number;
+  currentStep: number = 1;
 
   constructor(private fb: FormBuilder) {
     this.personalInfoForm = this.fb.group({
@@ -57,26 +57,21 @@ export class FormsComponent {
   }
 
   onSubmit() {
+    if (this.currentStep > 4) {
+      this.currentStep = 1;
+    }
+
     if (this.personalInfoForm.invalid) {
-      this.formErrorMessage = this.getFormErrorMessage();
       this.personalInfoForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
       return;
     }
 
+    if (this.personalInfoForm.valid) {
+      // Proceed to next step
+      this.currentStep = this.currentStep + 1; // Adjust this value based on your step logic
+    }
+
     // Handle form submission
     console.log('Form Submitted!', this.personalInfoForm.value);
-  }
-
-  private getFormErrorMessage(): string {
-    if (this.f['name'].errors?.['required']) {
-      return 'Invalid name.';
-    }
-    if (this.f['email'].errors?.['required']) {
-      return 'Invalid email address.';
-    }
-    if (this.f['phone'].errors?.['required']) {
-      return 'Invalid phone number.';
-    }
-    return 'Form is invalid.';
   }
 }

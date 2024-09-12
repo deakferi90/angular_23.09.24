@@ -15,7 +15,7 @@ export class SvgComponent {
       id: 1,
       subtitle: 'STEP 1',
       title: 'YOUR INFO',
-      active: true,
+      active: false,
     },
     {
       id: 2,
@@ -38,14 +38,10 @@ export class SvgComponent {
   ];
 
   setActiveStep(stepId: number): void {
-    this.stepsData.forEach((step) => (step.active = false));
+    this.stepsData.filter((step) => (step.active = false));
     const activeStep = this.stepsData.find((step) => step.id === stepId);
     if (activeStep) {
       activeStep.active = true;
     }
-  }
-
-  changeStep(id: number) {
-    console.log(id);
   }
 }

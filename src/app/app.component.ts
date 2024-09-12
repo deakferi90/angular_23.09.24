@@ -11,5 +11,4 @@ import { FirstStepComponent } from './first-step/first-step.component';
 })
 export class AppComponent {
   title = 'angular-steps-app';
-  currentStep: number = 1;
 }
