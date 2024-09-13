@@ -18,7 +18,7 @@ import {
 export class FormsComponent {
   personalInfoForm: FormGroup;
   formErrorMessage: string | null = null;
-  currentStep: number = 1;
+  @Input() currentStep!: number;
 
   constructor(private fb: FormBuilder) {
     this.personalInfoForm = this.fb.group({

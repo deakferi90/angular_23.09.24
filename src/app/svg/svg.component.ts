@@ -9,13 +9,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./svg.component.css'],
 })
 export class SvgComponent {
+  @Input() currentStep!: number;
   active: boolean = true;
   stepsData = [
     {
       id: 1,
       subtitle: 'STEP 1',
       title: 'YOUR INFO',
-      active: false,
+      active: true,
     },
     {
       id: 2,
