@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SvgComponent } from '../svg/svg.component';
 import { FormsComponent } from '../forms/forms.component';
 import { CommonModule } from '@angular/common';
@@ -6,20 +6,24 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 
 @Component({
   selector: 'app-first-step',
   standalone: true,
-  imports: [SvgComponent, FormsComponent, CommonModule],
+  imports: [SvgComponent, FormsComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './first-step.component.html',
   styleUrl: './first-step.component.css',
 })
 export class FirstStepComponent {
-  @Input() currentStep!: number;
   personalInfoForm: FormGroup;
   formErrorMessage: string | null = null;
+  @Input() currentStep!: number;
+  @Input() pricesAndNames!: string[];
+  @Output() nextStep = new EventEmitter<void>();
+  @Output() previousStep = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder) {
     this.personalInfoForm = this.fb.group({
@@ -43,12 +47,12 @@ export class FirstStepComponent {
   }
 
   phoneValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const phonePattern = /^[0-9]{10}$/; // Example pattern for 10 digits
+    const phonePattern = /^[0-9]{10}$/;
     if (!control.value) {
-      return null; // No validation if empty
+      return null;
     }
     if (!phonePattern.test(control.value)) {
-      return { phone: true }; // Invalid phone number
+      return { phone: true };
     }
     return null;
   }
@@ -58,21 +62,12 @@ export class FirstStepComponent {
   }
 
   onSubmit() {
-    if (this.currentStep > 4) {
-      this.currentStep = 1;
+    if (this.personalInfoForm.valid) {
+      this.nextStep.emit();
     }
-
     if (this.personalInfoForm.invalid) {
-      this.personalInfoForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      this.personalInfoForm.markAllAsTouched(); // Highlights all invalid fields
       return;
     }
-
-    if (this.personalInfoForm.valid) {
-      // Proceed to next step
-      this.currentStep = this.currentStep + 1; // Adjust this value based on your step logic
-    }
-
-    // Handle form submission
-    console.log('Form Submitted!', this.personalInfoForm.value);
   }
 }

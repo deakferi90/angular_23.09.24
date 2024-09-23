@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-svg',
@@ -8,9 +8,8 @@ import { Component, Input } from '@angular/core';
   templateUrl: './svg.component.html',
   styleUrls: ['./svg.component.css'],
 })
-export class SvgComponent {
+export class SvgComponent implements OnChanges {
   @Input() currentStep!: number;
-  active: boolean = true;
   stepsData = [
     {
       id: 1,
@@ -38,11 +37,15 @@ export class SvgComponent {
     },
   ];
 
-  setActiveStep(stepId: number): void {
-    this.stepsData.filter((step) => (step.active = false));
-    const activeStep = this.stepsData.find((step) => step.id === stepId);
-    if (activeStep) {
-      activeStep.active = true;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['currentStep']) {
+      this.updateActiveStep(this.currentStep);
     }
+  }
+
+  private updateActiveStep(step: number) {
+    this.stepsData.forEach((s) => {
+      s.active = s.id === step;
+    });
   }
 }

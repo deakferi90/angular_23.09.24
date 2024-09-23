@@ -1,6 +1,86 @@
 <div class="personal-info-box">
   <div class="image-container">
-    <app-svg />
-    <app-forms class="app-forms" [currentStep]="currentStep"></app-forms>
+    <app-svg [currentStep]="currentStep" />
+    <div class="form-container">
+      <h1 class="title">Personal info</h1>
+      <h3 class="subtitle">
+        Please provide your name, email address, and phone number.
+      </h3>
+
+      <form [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
+        <div class="input-container">
+          <div class="labels-container">
+            <label class="input-label" for="name">Name</label>
+            <div
+              class="error"
+              *ngIf="f['name'].errors?.['required'] && f['name'].touched"
+            >
+              Name is required.
+            </div>
+            <div class="error" *ngIf="f['name'].errors?.['name']">
+              Invalid name.
+            </div>
+          </div>
+          <input formControlName="name" class="name" type="text" id="name" />
+          <div
+            *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)"
+            class="error"
+          ></div>
+          <div class="labels-container">
+            <label class="input-label" for="email">Email Address</label>
+            <div
+              class="error"
+              *ngIf="f['email'].errors?.['required'] && f['email'].touched"
+            >
+              Email is required.
+            </div>
+            <div class="error" *ngIf="f['email'].errors?.['email']">
+              Invalid email address.
+            </div>
+          </div>
+          <input
+            formControlName="email"
+            class="name email"
+            type="email"
+            id="email"
+          />
+          <div
+            *ngIf="
+              f['email'].invalid && (f['email'].dirty || f['email'].touched)
+            "
+            class="error"
+          ></div>
+          <div class="labels-container">
+            <label class="input-label" for="phone">Phone</label>
+            <div
+              class="error"
+              *ngIf="f['phone'].errors?.['required'] && f['phone'].touched"
+            >
+              Phone number is required.
+            </div>
+            <div
+              class="error"
+              *ngIf="f['phone'].errors?.['phone'] && f['phone'].touched"
+            >
+              Invalid phone number.
+            </div>
+          </div>
+          <input
+            formControlName="phone"
+            class="name phone"
+            type="tel"
+            id="phone"
+          />
+          <div
+            *ngIf="
+              f['phone'].invalid && (f['phone'].dirty || f['phone'].touched)
+            "
+            class="error"
+          ></div>
+        </div>
+
+        <button type="submit" class="btn">Next Step</button>
+      </form>
+    </div>
   </div>
 </div>

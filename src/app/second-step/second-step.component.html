@@ -1,5 +1,56 @@
-<div class="plan-selection-container">
-  <h1 class="title">Select a Plan</h1>
-  <h3 class="subtitle">Choose the plan that works best for you.</h3>
-  <button class="btn">Next Step</button>
+<div class="personal-info-box">
+  <div class="image-container">
+    <app-svg [currentStep]="currentStep" />
+    <div class="form-container">
+      <h1 class="title">Select your Plan</h1>
+      <h3 class="subtitle">
+        You have the option of monthly or yearly billing.
+      </h3>
+      <form
+        class="form-element"
+        [formGroup]="personalInfoForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="selection-box-container">
+          @for(plan of planData; track plan.id) {
+          <div class="selection-box" (click)="onPlanSelect($event)">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+            >
+              <g fill="none" fill-rule="evenodd">
+                <circle cx="20" cy="20" r="20" [attr.fill]="plan.color" />
+                <path
+                  fill="#FFF"
+                  fill-rule="nonzero"
+                  [attr.d]="plan.iconPath"
+                />
+              </g>
+            </svg>
+            <h2 class="plan-title">
+              {{ plan.title }}
+            </h2>
+            <p class="plan-price">
+              {{ isYearly ? plan.yearlyPrice : plan.price }}
+            </p>
+          </div>
+          }
+        </div>
+        <div class="switch-box">
+          <label class="lbl">Mothly</label>
+          <label class="switch">
+            <input type="checkbox" formControlName="isYearly" />
+            <span class="slider round"></span>
+          </label>
+          <label class="lbl">Yearly</label>
+        </div>
+        <div class="btn-container">
+          <button class="btn btn-back" (click)="onBack()">Go Back</button>
+          <button class="btn" (click)="onNext()">Next Step</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,67 @@
+<div>
+  <div class="timer-setter">
+    <button
+      class="btn-timer"
+      id="btnTimer"
+      (click)="toggleButton($event, 'TIMER')"
+    >
+      Timer
+    </button>
+    <button
+      class="btn-timer"
+      id="btnTimerBreak"
+      (click)="toggleButton($event, 'BREAK')"
+    >
+      Break
+    </button>
+  </div>
+
+  <div class="pomodoro-timer">
+    <div class="container"></div>
+    <div class="timer-container">
+      <div class="minutes">{{ strMinutes }}</div>
+      <div class="middle">:</div>
+      <div class="seconds">{{ strSeconds }}</div>
+    </div>
+    <div class="buttons">
+      <button
+        id="play"
+        class="btn-black"
+        (click)="startCurrentTimer()"
+        *ngIf="status === 'STOP' || status === 'PAUSE'"
+      >
+        <img
+          class="icon-img"
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios-filled/50/FFFFFF/play--v1.png"
+          alt="play icon"
+        />
+      </button>
+
+      <button
+        id="pause"
+        class="btn-black"
+        (click)="pauseCurrentTimer()"
+        *ngIf="status === 'RUNNING'"
+      >
+        <img
+          class="icon-img"
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios-filled/50/FFFFFF/pause--v1.png"
+          alt="pause icon"
+        />
+      </button>
+
+      <button
+        id="stop"
+        class="btn-black"
+        (click)="stopCurrentTimer()"
+        *ngIf="status === 'RUNNING' || status === 'PAUSE'"
+      >
+        <i class="fas fa-undo"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="personal-info-box">
+  <div class="image-container">
+    <app-svg [currentStep]="currentStep" />
+    <div class="form-container">
+      <h1 class="title">Pick Add-ons</h1>
+      <h3 class="subtitle">Add-ons help enhance your gaming experience</h3>
+      <form
+        class="form-element"
+        [formGroup]="personalInfoForm"
+        (ngSubmit)="onSubmit()"
+      >
+        @for (item of addOnData; track item.id) {
+        <div class="switch-box" (click)="selectSwitchPrice($event)">
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <div>
+            <h4 class="lbl title">{{ item.title }}</h4>
+            <p class="lbl lbl-p subtitle">{{ item.subtitle }}</p>
+          </div>
+          <span class="plan-price">{{ item.price }}</span>
+        </div>
+        }
+        <div class="btn-container">
+          <button class="btn btn-back" (click)="onBack()">Go Back</button>
+          <button class="btn" (click)="onNext()">Next Step</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

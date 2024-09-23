@@ -1,0 +1,21 @@
+<div class="personal-info-box">
+  <div class="image-container">
+    <app-svg [currentStep]="currentStep" />
+    <div class="form-container">
+      <h1 class="title">This is the summary page</h1>
+      <h3 class="subtitle">Review and confirm your details.</h3>
+      <form class="form-element">
+        @for(item of pricesAndNames; track item) {
+        <div class="item-box">
+          <div class="inner-item">{{ item }}</div>
+        </div>
+        }
+        <div>Total: ${{ totalPrice }}</div>
+        <div class="btn-container">
+          <button class="btn btn-back" (click)="onBack($event)">Go Back</button>
+          <button class="btn" (click)="onFinish()">Finish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

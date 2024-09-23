@@ -1,93 +1,32 @@
-<div class="right-side-container">
-  @if(currentStep === 1) {
-  <div>
-    <h1 class="title">Personal info</h1>
-    <h3 class="subtitle">
-      Please provide your name, email address, and phone number.
-    </h3>
+<div class="right-side-container" [ngSwitch]="currentStep">
+  <app-first-step
+    *ngSwitchCase="1"
+    [currentStep]="currentStep"
+    (nextStep)="goToNextStep()"
+  ></app-first-step>
 
-    <form [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
-      <div class="input-container">
-        <div class="labels-container">
-          <label class="input-label" for="name">Name</label>
-          <div
-            class="error"
-            *ngIf="f['name'].errors?.['required'] && f['name'].touched"
-          >
-            Name is required.
-          </div>
-          <div class="error" *ngIf="f['name'].errors?.['name']">
-            Invalid name.
-          </div>
-        </div>
-        <input formControlName="name" class="name" type="text" id="name" />
-        <div
-          *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)"
-          class="error"
-        ></div>
-        <div class="labels-container">
-          <label class="input-label" for="email">Email Address</label>
-          <div
-            class="error"
-            *ngIf="f['email'].errors?.['required'] && f['email'].touched"
-          >
-            Email is required.
-          </div>
-          <div class="error" *ngIf="f['email'].errors?.['email']">
-            Invalid email address.
-          </div>
-        </div>
-        <input
-          formControlName="email"
-          class="name email"
-          type="email"
-          id="email"
-        />
-        <div
-          *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)"
-          class="error"
-        ></div>
-        <div class="labels-container">
-          <label class="input-label" for="phone">Phone</label>
-          <div
-            class="error"
-            *ngIf="f['phone'].errors?.['required'] && f['phone'].touched"
-          >
-            Phone number is required.
-          </div>
-          <div
-            class="error"
-            *ngIf="f['phone'].errors?.['phone'] && f['phone'].touched"
-          >
-            Invalid phone number.
-          </div>
-        </div>
-        <input
-          formControlName="phone"
-          class="name phone"
-          type="tel"
-          id="phone"
-        />
-        <div
-          *ngIf="f['phone'].invalid && (f['phone'].dirty || f['phone'].touched)"
-          class="error"
-        ></div>
-      </div>
+  <app-second-step
+    *ngSwitchCase="2"
+    [currentStep]="currentStep"
+    (priceSelected)="getExactPrice($event)"
+    (prevStep)="goToPreviousStep()"
+    (nextStep)="goToNextStep()"
+  ></app-second-step>
 
-      <button type="submit" class="btn">Next Step</button>
-    </form>
-  </div>
-  } @else if(currentStep === 2) {
-  <div class="plan-selection-container">
-    <h1 class="title">Select a Plan</h1>
-    <h3 class="subtitle">Choose the plan that works best for you.</h3>
-    <button class="btn">Next Step</button>
-  </div>
-  } @else if(currentStep === 3) {
-  <div class="plan-scheme-container">
-    <h1 class="title">Select a Grand Scheme</h1>
-    <h3 class="subtitle">Choose the plan that works best for you.</h3>
-    <button type="submit" class="btn">Next Step</button>
-  </div>
-  }
+  <app-third-step
+    *ngSwitchCase="3"
+    [currentStep]="currentStep"
+    (addOnSelected)="selectSwitchPrice($event)"
+    (prevStep)="goToPreviousStep()"
+    (nextStep)="goToNextStep()"
+  ></app-third-step>
+
+  <app-final-step
+    *ngSwitchCase="4"
+    [pricesAndNames]="pricesAndNames"
+    [currentStep]="currentStep"
+    [totalPrice]="getTotalPrice()"
+    (prevStep)="goToPreviousStep()"
+    (nextStep)="goToNextStep()"
+  ></app-final-step>
 </div>
