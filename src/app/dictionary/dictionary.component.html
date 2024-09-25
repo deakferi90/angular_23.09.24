@@ -1,0 +1,46 @@
+<div class="dictionary-container">
+  <!-- Input field for the word search -->
+  <input
+    class="search-input"
+    type="text"
+    [(ngModel)]="searchWord"
+    placeholder="Enter a word"
+    (keyup.enter)="onSearch()"
+    (keydown)="onKeyDown($event)"
+    (click)="onInputClick()"
+  />
+
+  <!-- Button to trigger the search -->
+  <button
+    class="{{ searchWord ? 'search-input-btn' : 'disabled' }}"
+    (click)="onSearch()"
+  >
+    Search
+  </button>
+</div>
+
+<!-- Display the result -->
+<div class="dictionary-container-result" *ngIf="dictionaryData">
+  <h3>Definition of "{{ searchWord }}"</h3>
+
+  @if(searchWord === '') {
+  <p>No word found.</p>
+  } @else {
+  <div
+    class="dictionary-meaning"
+    *ngFor="let meaning of dictionaryData.meanings"
+  >
+    <h4>{{ meaning.partOfSpeech }}</h4>
+    <ul>
+      <li *ngFor="let definition of meaning.definitions">
+        {{ definition.definition }}
+      </li>
+    </ul>
+  </div>
+  }
+</div>
+
+<!-- Display error if no result -->
+<div class="dictionary-meaning" *ngIf="errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>

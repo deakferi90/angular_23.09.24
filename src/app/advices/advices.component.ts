@@ -1,13 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-interface SlipResponse {
-  slip: {
-    id: number;
-    advice: string;
-  };
-}
+import AdvicesInterface from './advices.interface';
 
 @Component({
   selector: 'app-advices',
@@ -33,8 +27,8 @@ export class AdvicesComponent implements OnInit, OnDestroy {
 
   fetchAdvice(): void {
     this.subscription = this.http
-      .get<SlipResponse>('https://api.adviceslip.com/advice')
-      .subscribe((response: SlipResponse) => {
+      .get<AdvicesInterface>('https://api.adviceslip.com/advice')
+      .subscribe((response: AdvicesInterface) => {
         const slip = response.slip;
         this.resp = slip.advice;
       });

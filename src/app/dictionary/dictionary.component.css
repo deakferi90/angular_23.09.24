@@ -1,0 +1,27 @@
+.dictionary-meaning {
+  background: cyan;
+}
+
+.search-input,
+.dictionary-meaning {
+  padding: 10px 20px;
+}
+
+.search-input-btn {
+  margin: 25px;
+  background: navy;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.dictionary-container-result {
+  width: 450px;
+}
+
+.disabled {
+  background: gray;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 25px;
+  pointer-events: none;
+}

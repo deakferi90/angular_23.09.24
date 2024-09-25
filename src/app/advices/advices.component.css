@@ -14,3 +14,10 @@
   padding: 0 20px;
   text-align: center;
 }
+
+.svg-img {
+  position: absolute;
+  bottom: 100px;
+  left: calc(50% - 222px);
+  width: 444px;
+}
