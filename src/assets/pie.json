@@ -1,0 +1,6 @@
+[
+  { "name": "Chrome", "value": 40 },
+  { "name": "Firefox", "value": 30 },
+  { "name": "Edge", "value": 20 },
+  { "name": "Safari", "value": 10 }
+]

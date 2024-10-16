@@ -1,0 +1,10 @@
+<li class="todo-item mt-5 w-1/2 flex justify-between">
+  <span
+    class="px-5 p-2 ml-5 min-w-[200px]"
+    [class.completed]="todo.completed"
+    >{{ todo.text }}</span
+  >
+  <button class="px-5 p-2 ml-5 bg-red-400 text-white" (click)="removeTodo()">
+    Delete
+  </button>
+</li>
